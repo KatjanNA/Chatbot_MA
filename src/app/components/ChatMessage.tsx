@@ -1,15 +1,12 @@
-import { Bot, User } from "lucide-react";
 import { ReactNode } from "react";
 
 interface ChatMessageProps {
   message: string | ReactNode;
-  isUser: boolean;
   timestamp: string;
 }
 
 export function ChatMessage({
   message,
-  isUser,
   timestamp,
 }: ChatMessageProps) {
   return (

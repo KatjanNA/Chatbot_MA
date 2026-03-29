@@ -9,7 +9,6 @@ import { ReactNode } from "react";
 interface Message {
   id: number;
   text: string | ReactNode;
-  isUser: boolean;
   timestamp: string;
   isStreaming?: boolean;
 }
@@ -33,6 +32,7 @@ export default function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [showFooterText, setShowFooterText] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const updateMessageTimestamp = (id: number) => {
@@ -58,7 +58,9 @@ export default function App() {
     scrollToBottom();
   }, [messages]);
 
-
+  const showFooterAfterThinking = () => {
+    setShowFooterText(true);
+  };
 
   // Initial AI greeting with ETF comparison after 7 seconds
   useEffect(() => {
@@ -67,11 +69,13 @@ export default function App() {
         id: 1,
         text: (
           <StreamingResponse
-            onStart={() => setIsLoading(false)}
+            onStart={() => {
+              setIsLoading(false);
+              showFooterAfterThinking();
+            }}
             onComplete={() => updateMessageTimestamp(1)}
           />
         ),
-        isUser: false,
         timestamp: "",
         isStreaming: true,
       };
@@ -87,7 +91,6 @@ export default function App() {
     const newMessage: Message = {
       id: messages.length + 1,
       text: inputValue,
-      isUser: true,
       timestamp: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -98,20 +101,23 @@ export default function App() {
     setMessages([...messages, newMessage]);
     setInputValue("");
     setIsLoading(true);
+    setShowFooterText(false);
 
     // Simulate AI "thinking" time
     setTimeout(
       () => {
         const responseId = messages.length + 2;
-    const aiResponse: Message = {
+        const aiResponse: Message = {
           id: responseId,
           text: (
             <StreamingResponse
-              onStart={() => setIsLoading(false)}
+              onStart={() => {
+                setIsLoading(false);
+                showFooterAfterThinking();
+              }}
               onComplete={() => updateMessageTimestamp(responseId)}
             />
           ),
-          isUser: false,
           timestamp: "",
           isStreaming: true,
         };
@@ -137,7 +143,6 @@ export default function App() {
         <div className="bg-gradient-to-r from-violet-500 to-violet-600 text-white p-5 shadow-md">
           <div className="flex items-center gap-3">
             <Sparkles className="w-7 h-7" />
-            <h1 className="text-2xl font-semibold">KI-Assistent</h1>
           </div>
         </div>
 
@@ -147,7 +152,6 @@ export default function App() {
             <ChatMessage
               key={message.id}
               message={message.text}
-              isUser={message.isUser}
               timestamp={message.timestamp}
             />
           ))}
@@ -169,9 +173,11 @@ export default function App() {
         </div>
 
           {/*text für standard disclaimer*/}
-        <div className="bg-gray-100 border-t border-gray-200 p-5 text-sm text-gray-700 h-[72px] flex items-center">
-          <p className="m-0"> {/*text für standard disclaimer*/}
-            
+        <div className="bg-gray-100 border-t border-gray-200 p-5 text-sm text-gray-700 h-[72px] flex items-center justify-center">
+          <p className="m-0 text-center">
+            {showFooterText
+              ? "Der Assistant ist eine KI. Überprüfe wichtige Informationen."
+              : ""}
           </p>
         </div>
       </div>
