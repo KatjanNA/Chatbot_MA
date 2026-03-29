@@ -2,8 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { Send, Sparkles, Loader2, Loader2Icon } from "lucide-react";
 import { ChatMessage } from "./components/ChatMessage";
 import { StreamingResponse } from "./components/StreamingResponse";
-import { Button } from "./components/ui/button";
-import { Input } from "./components/ui/input";
 import { ReactNode } from "react";
 
 interface Message {
