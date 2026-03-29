@@ -25,8 +25,8 @@ const getPredefinedResponse = (
   return (
     <div className="space-y-3">
       <ETFComparison />
-      <div className="text-sm leading-relaxed">
-        <p className="mb-3">
+      <div className="text-base leading-relaxed">
+        <p className="mb-3 text-base">
           Basierend auf der Analyse der beiden ETFs möchte ich
           Ihnen folgende Einschätzung geben:
         </p>
@@ -225,11 +225,11 @@ export default function App() {
         {showDisclaimer && (
           <div className="border-t border-gray-200 bg-gray-50 p-6 animate-fade-in">
             <div className="max-w-5xl mx-auto">
-              <div className="flex gap-4 items-start bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+              <div className="flex gap-4 items-center bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
                 <img
                   src={iconSvg}
                   alt="AI"
-                  className="w-8 h-8 flex-shrink-0 mt-1"
+                  className="w-20 h-20 flex-shrink-0"
                 />
                 <p className="text-sm text-gray-700 leading-relaxed">
                   {displayedDisclaimer}
