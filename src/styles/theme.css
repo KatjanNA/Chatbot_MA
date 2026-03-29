@@ -204,7 +204,7 @@
   50% {
     opacity: 1;
     color: #7c3aed;
-    transform: translateY(-4px);
+    transform: translateY(0.5px);
   }
 }
 

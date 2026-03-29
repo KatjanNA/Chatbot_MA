@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Sparkles, Loader2 } from "lucide-react";
+import { Send, Sparkles, Loader2, Loader2Icon } from "lucide-react";
 import { ChatMessage } from "./components/ChatMessage";
 import { StreamingResponse } from "./components/StreamingResponse";
 import { Button } from "./components/ui/button";
@@ -207,83 +207,11 @@ export default function App() {
           {isLoading && (
             <div className="mb-8 w-full">
               <div className="max-w-3xl mx-auto px-4">
-                <div className="inline-flex items-center gap-3 bg-gradient-to-r from-violet-50 to-purple-50 px-5 py-3 rounded-full shadow-sm border border-violet-100">
-                  <Loader2 className="w-5 h-5 text-violet-600 animate-spin" />
+                <div className="inline-flex items-center gap-3 bg-gradient-to-r">
+                  <Sparkles className="w-5 h-5 text-violet-500 animate-spin" />
                   <div className="flex text-base font-medium">
                     <span className="animate-thinking-text">
-                      D
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.1s" }}
-                    >
-                      e
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.2s" }}
-                    >
-                      n
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.3s" }}
-                    >
-                      k
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.4s" }}
-                    >
-                      t
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.5s" }}
-                    >
-                      &nbsp;
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.6s" }}
-                    >
-                      n
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.7s" }}
-                    >
-                      a
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.8s" }}
-                    >
-                      c
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "0.9s" }}
-                    >
-                      h
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "1.0s" }}
-                    >
-                      .
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "1.1s" }}
-                    >
-                      .
-                    </span>
-                    <span
-                      className="animate-thinking-text"
-                      style={{ animationDelay: "1.2s" }}
-                    >
-                      .
+                      Analysiere ETF A und ETF B...
                     </span>
                   </div>
                 </div>
