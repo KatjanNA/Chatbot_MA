@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import iconSvg from "../../imports/ICON01.svg";
+import iconSvg from "../../imports/ICON03.svg";
 import { ETFComparison } from "./ETFComparison";
 
 interface StreamingResponseProps {
@@ -16,6 +16,10 @@ const fullText = {
     " Ich empfehle Ihnen für Ihre Anlage von 3000€ eine gezielte Aufteilung im Verhältnis von 70% zu 30%. Für Ihr Portfolio bedeutet dies konkret, dass Sie 2100€ in den ETF A und 900€ in den ETF B investieren sollten.",
   conclusion:
     " Diese Gewichtung ermöglicht Ihnen ein ausgewogenes Verhältnis zwischen Renditechancen und Risikomanagement. Sie nutzen das Renditepotenzial des globalen Marktes, während gleichzeitig durch den defensiveren Anteil von ETF B Risiken reduziert werden. Insgesamt nutzen Sie eine ausgewogene Kombination aus Wachstum und Stabilität bei gleichzeitig moderaten Kosten.",
+
+  end: 
+    " Abschlusszeile.",
+
   disclaimer:
     " Diese Inhalte wurden von einer Künstlichen Intelligenz erstellt. Sie dienen zu Informationszwecken, können Fehler enthalten und ersetzen keine professionelle Beratung. Bitte prüfen Sie wichtige Angaben eigenständig, bevor Sie auf deren Basis handeln.",
 };
@@ -36,6 +40,8 @@ export function StreamingResponse({
     useState("");
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [displayedDisclaimer, setDisplayedDisclaimer] = useState("");
+  const [showEnd, setShowEnd] = useState(false);
+  const [displayedEnd, setDisplayedEnd] = useState("");
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -130,36 +136,61 @@ export function StreamingResponse({
                           50,
                         );
                       } else {
-                        setShowDisclaimer(true);
-                        setDisplayedDisclaimer("");
-                        const disclaimerWords =
-                          fullText.disclaimer.split(" ");
-                        let disclaimerIndex = 0;
+                        setShowEnd(true);
+                        setDisplayedEnd("");
+                        const endWords = fullText.end.split(" ");
+                        let endIndex = 0;
 
-                        const streamDisclaimer = () => {
+                        const streamEnd = () => {
                           if (
-                            disclaimerIndex <
-                            disclaimerWords.length - 1 
+                            endIndex <
+                            endWords.length -1 
                           ) {
-                            setDisplayedDisclaimer((prev) =>
+                            setDisplayedEnd((prev) =>
                               prev
-                                ? prev + " " +
-                                  disclaimerWords[disclaimerIndex]
-                                : disclaimerWords[disclaimerIndex],
+                                ? prev + " " + endWords[endIndex]
+                                : endWords[endIndex],
                             );
-                            disclaimerIndex++;
+                            endIndex++;
                             timeoutId = setTimeout(
-                              streamDisclaimer,
+                              streamEnd,
                               50,
                             );
                           } else {
-                            if (onComplete) {
-                              onComplete();
-                            }
+                            setShowDisclaimer(true);
+                            setDisplayedDisclaimer("");
+                            const disclaimerWords =
+                              fullText.disclaimer.trim().split(" ");
+                            let disclaimerIndex = 0;
+
+                            const streamDisclaimer = () => {
+                              if (
+                                disclaimerIndex <
+                                disclaimerWords.length -1 
+                              ) {
+                                setDisplayedDisclaimer((prev) =>
+                                  prev
+                                    ? prev + " " +
+                                      disclaimerWords[disclaimerIndex]
+                                    : disclaimerWords[disclaimerIndex],
+                                );
+                                disclaimerIndex++;
+                                timeoutId = setTimeout(
+                                  streamDisclaimer,
+                                  50,
+                                );
+                              } else {
+                                if (onComplete) {
+                                  onComplete();
+                                }
+                              }
+                            };
+
+                            streamDisclaimer();
                           }
                         };
 
-                        streamDisclaimer();
+                        streamEnd();
                       }
                     };
 
@@ -253,6 +284,10 @@ export function StreamingResponse({
           <p className="mb-6 mt-3">
             {displayedConclusion}
           </p>
+        )}
+
+        {showEnd && displayedEnd && (
+          <p className="mb-3 mt-3">{displayedEnd}</p>
         )}
 
         {showDisclaimer && (
