@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Sparkles, Loader2, Loader2Icon } from "lucide-react";
+import { Sparkles} from "lucide-react";
 import { ChatMessage } from "./components/ChatMessage";
 import { StreamingResponse } from "./components/StreamingResponse";
 import { ReactNode } from "react";
