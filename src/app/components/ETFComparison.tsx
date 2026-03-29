@@ -1,7 +1,7 @@
 export function ETFComparison() {
   return (
-    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 my-3">
-      <h3 className="font-semibold text-lg mb-3 text-center">
+    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 my-3 animate-fade-in">
+      <h3 className="font-semibold text-lg mb-3 text-center text-violet-700">
         ETF-Vergleich
       </h3>
 
@@ -56,7 +56,7 @@ export function ETFComparison() {
                 </span>
               </td>
               <td className="py-3 px-2 font-semibold text-green-700 text-center align-middle">
-                5,2% p.a.
+                5,2%
               </td>
               <td className="py-3 px-2 text-center align-middle">0,3%</td>
               <td className="py-3 px-2 text-center text-s align-middle">
@@ -66,7 +66,7 @@ export function ETFComparison() {
             <tr className="bg-violet-50">
               <td className="py-3 px-2 text-center align-middle">
                 <div className="font-semibold">ETF B</div>
-                <div className="text-xs text-gray-600">
+                <div className="text-s text-gray-600">
                   Beta Nachhaltig
                 </div>
               </td>
@@ -77,7 +77,7 @@ export function ETFComparison() {
                 </span>
               </td>
               <td className="py-3 px-2 font-semibold text-green-700 text-center align-middle">
-                3,1% p.a.
+                3,1%
               </td>
               <td className="py-3 px-2 text-center align-middle">0,2%</td>
               <td className="py-3 px-2 text-center text-s align-middle">

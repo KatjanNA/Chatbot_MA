@@ -22,6 +22,11 @@ export function ChatMessage({
         ) : (
           message
         )}
+        {timestamp && (
+          <p className="mt-2 text-right text-xs text-gray-500">
+            {timestamp}
+          </p>
+        )}
       </div>
     </div>
   );

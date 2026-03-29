@@ -5,7 +5,6 @@ import { StreamingResponse } from "./components/StreamingResponse";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 import { ReactNode } from "react";
-import iconSvg from "../imports/ICON01.svg";
 
 interface Message {
   id: number;
@@ -25,40 +24,7 @@ const getPredefinedResponse = (
   return (
     <div className="space-y-3">
       <ETFComparison />
-      <div className="text-base leading-relaxed">
-        <p className="mb-3 text-base">
-          Basierend auf der Analyse der beiden ETFs möchte ich
-          Ihnen folgende Einschätzung geben:
-        </p>
-        <p className="mb-3">
-          <strong>ETF A (Alpha Global)</strong> bietet eine
-          höhere Rendite von 5,2% und investiert weltweit in
-          dynamische Wachstumsbranchen. Die mittlere
-          Risikoklasse ermöglicht attraktive Ertragschancen.
-        </p>
-        <p className="mb-3">
-          <strong>ETF B (Beta Nachhaltig)</strong> fokussiert
-          sich auf nachhaltige europäische Investments mit
-          niedriger Risikoklasse und geringeren Kosten. Die
-          Rendite ist mit 3,1% moderater, dafür aber stabiler.
-        </p>
-        <div className="bg-violet-50 border-l-4 border-violet-500 p-3 rounded mt-3">
-          <p className="font-semibold text-violet-900 mb-2">
-            💡 Meine Empfehlung:
-          </p>
-          <p className="text-violet-800">
-            Für eine höhere und bessere Diversifikation sollte
-            man <strong>40% in A</strong> und{" "}
-            <strong>60% in B</strong> investieren.
-          </p>
-        </div>
-
-        <p className="mb-6 text-gray-600 mt-3">
-          Diese Aufteilung kombiniert das Wachstumspotenzial von
-          ETF A mit der Stabilität und Nachhaltigkeit von ETF B,
-          während gleichzeitig das Risiko optimal verteilt wird.
-        </p>
-      </div>
+      
     </div>
   );
 };
@@ -67,12 +33,20 @@ export default function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [showDisclaimer, setShowDisclaimer] = useState(false);
-  const [displayedDisclaimer, setDisplayedDisclaimer] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const disclaimerText =
-    "Diese Inhalte wurden von einer Künstlichen Intelligenz erstellt. Sie dienen zu Informationszwecken, können Fehler enthalten und ersetzen keine professionelle Beratung. Bitte prüfe wichtigen Angaben eigenständig, bevor auf deren Basis gehandelt wird.";
+  const updateMessageTimestamp = (id: number) => {
+    const timestamp = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    setMessages((prev) =>
+      prev.map((message) =>
+        message.id === id ? { ...message, timestamp } : message,
+      ),
+    );
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({
@@ -84,23 +58,7 @@ export default function App() {
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    if (showDisclaimer) {
-      const words = disclaimerText.split(" ");
-      let index = 0;
-      const intervalId = setInterval(() => {
-        if (index < words.length) {
-          setDisplayedDisclaimer((prev) =>
-            prev ? prev + " " + words[index] : words[index]
-          );
-          index++;
-        } else {
-          clearInterval(intervalId);
-        }
-      }, 50);
-      return () => clearInterval(intervalId);
-    }
-  }, [showDisclaimer]);
+
 
   // Initial AI greeting with ETF comparison after 7 seconds
   useEffect(() => {
@@ -110,16 +68,11 @@ export default function App() {
         text: (
           <StreamingResponse
             onStart={() => setIsLoading(false)}
-            onComplete={() => {
-              setTimeout(() => setShowDisclaimer(true), 2000);
-            }}
+            onComplete={() => updateMessageTimestamp(1)}
           />
         ),
         isUser: false,
-        timestamp: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
+        timestamp: "",
         isStreaming: true,
       };
       setMessages([initialResponse]);
@@ -145,27 +98,21 @@ export default function App() {
     setMessages([...messages, newMessage]);
     setInputValue("");
     setIsLoading(true);
-    setShowDisclaimer(false);
-    setDisplayedDisclaimer("");
 
     // Simulate AI "thinking" time
     setTimeout(
       () => {
-        const aiResponse: Message = {
-          id: messages.length + 2,
+        const responseId = messages.length + 2;
+    const aiResponse: Message = {
+          id: responseId,
           text: (
             <StreamingResponse
               onStart={() => setIsLoading(false)}
-              onComplete={() => {
-                setTimeout(() => setShowDisclaimer(true), 2000);
-              }}
+              onComplete={() => updateMessageTimestamp(responseId)}
             />
           ),
           isUser: false,
-          timestamp: new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
+          timestamp: "",
           isStreaming: true,
         };
 
@@ -190,7 +137,7 @@ export default function App() {
         <div className="bg-gradient-to-r from-violet-500 to-violet-600 text-white p-5 shadow-md">
           <div className="flex items-center gap-3">
             <Sparkles className="w-7 h-7" />
-            <h1 className="text-2xl font-semibold">KI Assistent</h1>
+            <h1 className="text-2xl font-semibold">KI-Assistent</h1>
           </div>
         </div>
 
@@ -221,23 +168,12 @@ export default function App() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Disclaimer Area */}
-        {showDisclaimer && (
-          <div className="border-t border-gray-200 bg-gray-50 p-6 animate-fade-in">
-            <div className="max-w-5xl mx-auto">
-              <div className="flex gap-4 items-center bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
-                <img
-                  src={iconSvg}
-                  alt="AI"
-                  className="w-20 h-20 flex-shrink-0"
-                />
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  {displayedDisclaimer}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
+          {/*text für standard disclaimer*/}
+        <div className="bg-gray-100 border-t border-gray-200 p-5 text-sm text-gray-700 h-[72px] flex items-center">
+          <p className="m-0"> {/*text für standard disclaimer*/}
+            
+          </p>
+        </div>
       </div>
     </div>
   );

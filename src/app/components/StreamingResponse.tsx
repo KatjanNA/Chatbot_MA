@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import iconSvg from "../../imports/ICON01.svg";
 import { ETFComparison } from "./ETFComparison";
 
 interface StreamingResponseProps {
@@ -8,13 +9,15 @@ interface StreamingResponseProps {
 
 const fullText = {
   intro:
-    " Basierend auf der Analyse der beiden ETFs möchte ich Ihnen folgende Einschätzung geben:",
-  etfA: " ETF A (Alpha Global) bietet eine höhere Rendite von 5,2% und investiert weltweit in dynamische Wachstumsbranchen. Die mittlere Risikoklasse ermöglicht attraktive Ertragschancen.",
-  etfB: " ETF B (Beta Nachhaltig) fokussiert sich auf nachhaltige europäische Investments mit niedriger Risikoklasse und geringeren Kosten. Die Rendite ist mit 3,1% moderater, dafür aber stabiler.",
+    " Basierend auf der Analyse der vorliegenden Daten für ETF A und ETF B möchte ich Ihnen eine Einschätzung zur Anlage Ihres Kapitals von 3.000€ geben. Hierfür stelle ich Ihnen eine strukturierte und ausgewogene Vorgehensweise vor.",
+  etfA: " ETF A (Alpha Global): ETF A bietet Ihnen gute Chancen auf überdurchschnittliche Erträge im globalen Kontext durch die attraktive Rendite von 5,2%. Durch die Einstufung in die mittlere Risikoklasse müssen Sie jedoch mit Schwankungen rechnen.",
+  etfB: " ETF B (Beta Nachhaltig): ETF B dient für Sie als stabilisierende Komponente durch die niedrige Risikoklasse sowie der geringen Kostenquote von 0,2%. Die Rendite von 3,1% hingegen fällt moderater aus, und kann Ihnen bei der Risikoreduzierung behilflich sein.",
   recommendation:
-    " Für eine höhere und bessere Diversifikation sollte man 40% in A und 60% in B investieren.",
+    " Ich empfehle Ihnen für Ihre Anlage von 3000€ eine gezielte Aufteilung im Verhältnis von 70% zu 30%. Für Ihr Portfolio bedeutet dies konkret, dass Sie 2100€ in den ETF A und 900€ in den ETF B investieren sollten.",
   conclusion:
-    " Diese Aufteilung kombiniert das Wachstumspotenzial von ETF A mit der Stabilität und Nachhaltigkeit von ETF B, während gleichzeitig das Risiko optimal verteilt wird.",
+    " Diese Gewichtung ermöglicht Ihnen ein ausgewogenes Verhältnis zwischen Renditechancen und Risikomanagement. Sie nutzen das Renditepotenzial des globalen Marktes, während gleichzeitig durch den defensiveren Anteil von ETF B Risiken reduziert werden. Insgesamt nutzen Sie eine ausgewogene Kombination aus Wachstum und Stabilität bei gleichzeitig moderaten Kosten.",
+  disclaimer:
+    " Diese Inhalte wurden von einer Künstlichen Intelligenz erstellt. Sie dienen zu Informationszwecken, können Fehler enthalten und ersetzen keine professionelle Beratung. Bitte prüfen Sie wichtige Angaben eigenständig, bevor Sie auf deren Basis handeln.",
 };
 
 export function StreamingResponse({
@@ -31,6 +34,8 @@ export function StreamingResponse({
     useState("");
   const [displayedConclusion, setDisplayedConclusion] =
     useState("");
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [displayedDisclaimer, setDisplayedDisclaimer] = useState("");
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -125,10 +130,36 @@ export function StreamingResponse({
                           50,
                         );
                       } else {
-                        // All done - call onComplete
-                        if (onComplete) {
-                          onComplete();
-                        }
+                        setShowDisclaimer(true);
+                        setDisplayedDisclaimer("");
+                        const disclaimerWords =
+                          fullText.disclaimer.split(" ");
+                        let disclaimerIndex = 0;
+
+                        const streamDisclaimer = () => {
+                          if (
+                            disclaimerIndex <
+                            disclaimerWords.length - 1 
+                          ) {
+                            setDisplayedDisclaimer((prev) =>
+                              prev
+                                ? prev + " " +
+                                  disclaimerWords[disclaimerIndex]
+                                : disclaimerWords[disclaimerIndex],
+                            );
+                            disclaimerIndex++;
+                            timeoutId = setTimeout(
+                              streamDisclaimer,
+                              50,
+                            );
+                          } else {
+                            if (onComplete) {
+                              onComplete();
+                            }
+                          }
+                        };
+
+                        streamDisclaimer();
                       }
                     };
 
@@ -159,7 +190,7 @@ export function StreamingResponse({
     <div className="space-y-3">
       {showTable && <ETFComparison />}
 
-      <div className="text-sm leading-relaxed">
+      <div className="text-base leading-relaxed">
         {displayedIntro && (
           <p className="mb-3">{displayedIntro}</p>
         )}
@@ -219,9 +250,22 @@ export function StreamingResponse({
         )}
 
         {displayedConclusion && (
-          <p className="mb-6 text-gray-600 mt-3">
+          <p className="mb-6 mt-3">
             {displayedConclusion}
           </p>
+        )}
+
+        {showDisclaimer && (
+          <div className="bg-gray-100 border border-gray-200 rounded-lg p-2 text-sm text-gray-600 animate-fade-in">
+            <div className="flex items-center gap-2">
+              <img
+                src={iconSvg}
+                alt="AI"
+                className="w-24 h-24 flex-shrink-0"
+              />
+              <p className="m-0">{displayedDisclaimer}</p>
+            </div>
+          </div>
         )}
       </div>
     </div>
