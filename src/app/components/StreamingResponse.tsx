@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import iconSvg from "../../imports/ICON03.svg";
+import iconSvg from "../../imports/ICONCircle01.svg";
 import { ETFComparison } from "./ETFComparison";
 
 interface StreamingResponseProps {
@@ -9,19 +9,18 @@ interface StreamingResponseProps {
 
 const fullText = {
   intro:
-    " Basierend auf der Analyse der vorliegenden Daten für ETF A und ETF B möchte ich Ihnen eine Einschätzung zur Anlage Ihres Kapitals von 3.000€ geben. Hierfür stelle ich Ihnen eine strukturierte und ausgewogene Vorgehensweise vor.",
-  etfA: " ETF A (Alpha Global): ETF A bietet Ihnen gute Chancen auf überdurchschnittliche Erträge im globalen Kontext durch die attraktive Rendite von 5,2%. Durch die Einstufung in die mittlere Risikoklasse müssen Sie jedoch mit Schwankungen rechnen.",
-  etfB: " ETF B (Beta Nachhaltig): ETF B dient für Sie als stabilisierende Komponente durch die niedrige Risikoklasse sowie der geringen Kostenquote von 0,2%. Die Rendite von 3,1% hingegen fällt moderater aus, und kann Ihnen bei der Risikoreduzierung behilflich sein.",
+    " Um deine 3.000€ sinnvoll anzulegen, habe ich ETF A und ETF B miteinander verglichen und eine passende Strategie entwickelt, die auf Wachstum und Sicherheit aufbaut.",
+  etfA: " unterstützt dich weltweit in wachstumsstarke Bereiche zu investieren. Mit einer Rendite von 5,2% bietet er dir gute Ertragschancen, ist aber mit mittlerem Risiko verbunden, womit du stärkere Schwankungen unterliegen kannst.",
+  etfB: " fokussiert sich auf nachhaltige und europäische Unternehmen. Die Rendite ist mit 3,1% niedriger, dafür ist das Risiko geringer und die Kosten sind günstiger. So sorgt der Fonds für Stabilität und Sicherheit in deinem Portfolio.",
   recommendation:
-    " Ich empfehle Ihnen für Ihre Anlage von 3000€ eine gezielte Aufteilung im Verhältnis von 70% zu 30%. Für Ihr Portfolio bedeutet dies konkret, dass Sie 2100€ in den ETF A und 900€ in den ETF B investieren sollten.",
+    " Ich würde dir raten dein Geld aufzuteilen mit 70% in ETF A und 30% in ETF B. Das entspricht 2.100 € und 900 €, womit du Wachstumspotenzial nutzt, ohne hohes Risiko einzugehen.",
   conclusion:
-    " Diese Gewichtung ermöglicht Ihnen ein ausgewogenes Verhältnis zwischen Renditechancen und Risikomanagement. Sie nutzen das Renditepotenzial des globalen Marktes, während gleichzeitig durch den defensiveren Anteil von ETF B Risiken reduziert werden. Insgesamt nutzen Sie eine ausgewogene Kombination aus Wachstum und Stabilität bei gleichzeitig moderaten Kosten.",
-
+    " Mit dem Anteil im ETF A setzt du auf weltweites Wachstum und nutzt die höheren Renditechancen. ETF B nutzt du, um dein Gesamtrisiko zu senken. So erreichst du eine gute Streuung für dein Geld. Du profitierst durch diese Mischung von einer soliden Wertentwicklung und hältst gleichzeitig deine laufenden Kosten niedrig.",
   end: 
-    " Abschlusszeile.",
+    " Damit bist du solide aufgestellt!",
 
   disclaimer:
-    " Diese Inhalte wurden von einer Künstlichen Intelligenz erstellt. Sie dienen zu Informationszwecken, können Fehler enthalten und ersetzen keine professionelle Beratung. Bitte prüfen Sie wichtige Angaben eigenständig, bevor Sie auf deren Basis handeln.",
+    " . Diese Nachricht ist KI-generiert und wurde anhand von statistischen Wahrscheinlichkeiten erstellt. Sie dient zu Informationszwecken, kann Fehler enthalten und ersetzt keine professionelle Beratung. Bei der Nutzung der Informationen sollten wichtige Angaben eigenständig geprüft werden.",
 };
 
 export function StreamingResponse({
@@ -166,7 +165,7 @@ export function StreamingResponse({
                             const streamDisclaimer = () => {
                               if (
                                 disclaimerIndex <
-                                disclaimerWords.length -1 
+                                disclaimerWords.length 
                               ) {
                                 setDisplayedDisclaimer((prev) =>
                                   prev

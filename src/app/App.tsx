@@ -171,10 +171,10 @@ export default function App() {
         </div>
 
           {/*text für standard disclaimer*/}
-        <div className="bg-gray-100 border-t border-gray-200 p-5 text-sm text-gray-700 h-[72px] flex items-center justify-center">
+        <div className="bg-gray-100 border-t border-gray-200 p-5 text-sm text-gray-500 h-[72px] flex items-center justify-center">
           <p className="m-0 text-center">
             {showFooterText
-              ? "Der Assistant ist eine KI. Überprüfe wichtige Informationen."
+              ? "Der Assistent ist eine KI und kann Fehler machen. Überprüfe wichtige Informationen."
               : ""}
           </p>
         </div>
