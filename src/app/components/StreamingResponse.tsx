@@ -20,7 +20,7 @@ const fullText = {
     " Damit bist du solide aufgestellt!",
 
   disclaimer:
-    " . Diese Nachricht ist KI-generiert und wurde anhand von statistischen Wahrscheinlichkeiten erstellt. Sie dient zu Informationszwecken, kann Fehler enthalten und ersetzt keine professionelle Beratung. Bei der Nutzung der Informationen sollten wichtige Angaben eigenständig geprüft werden.",
+    " Diese Nachricht ist KI-generiert und wurde anhand von statistischen Wahrscheinlichkeiten erstellt. Sie dient zu Informationszwecken, kann Fehler enthalten und ersetzt keine professionelle Beratung. Bei der Nutzung der Informationen sollten wichtige Angaben eigenständig geprüft werden.",
 };
 
 export function StreamingResponse({
@@ -160,12 +160,12 @@ export function StreamingResponse({
                             setDisplayedDisclaimer("");
                             const disclaimerWords =
                               fullText.disclaimer.trim().split(" ");
-                            let disclaimerIndex = 0;
+                            let disclaimerIndex = -2;
 
                             const streamDisclaimer = () => {
                               if (
                                 disclaimerIndex <
-                                disclaimerWords.length 
+                                disclaimerWords.length - 1
                               ) {
                                 setDisplayedDisclaimer((prev) =>
                                   prev
