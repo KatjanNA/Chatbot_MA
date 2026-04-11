@@ -290,7 +290,7 @@ export function StreamingResponse({
         )}
 
         {showDisclaimer && (
-          <div className="bg-gray-100 border border-gray-200 rounded-lg p-2 text-sm text-gray-600 animate-fade-in">
+          <div className="bg-gray-100 border shadow-sm border-gray-200 rounded-lg p-2 text-sm text-gray-600 animate-fade-in">
             <div className="flex items-center gap-2">
               <img
                 src={iconSvg}
