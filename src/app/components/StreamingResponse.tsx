@@ -13,7 +13,7 @@ const fullText = {
   etfA: " unterstützt dich weltweit in wachstumsstarke Bereiche zu investieren. Mit einer Rendite von 5,2% bietet er dir gute Ertragschancen, ist aber mit mittlerem Risiko verbunden, womit du stärkere Schwankungen unterliegen kannst.",
   etfB: " fokussiert sich auf nachhaltige und europäische Unternehmen. Die Rendite ist mit 3,1% niedriger, dafür ist das Risiko geringer und die Kosten sind günstiger. So sorgt der Fonds für Stabilität und Sicherheit in deinem Portfolio.",
   recommendation:
-    " Ich würde dir raten dein Geld aufzuteilen mit 70% in ETF A und 30% in ETF B. Das entspricht 2.100 € und 900 €, womit du Wachstumspotenzial nutzt, ohne hohes Risiko einzugehen.",
+    " Ich würde dir raten dein Geld aufzuteilen mit 70 % in ETF A und 30 % in ETF B. Das entspricht 2.100 € und 900 €, womit du Wachstumspotenzial nutzt, ohne hohes Risiko einzugehen.",
   conclusion:
     " Mit dem Anteil im ETF A setzt du auf weltweites Wachstum und nutzt die höheren Renditechancen. ETF B nutzt du, um dein Gesamtrisiko zu senken. So erreichst du eine gute Streuung für dein Geld. Du profitierst durch diese Mischung von einer soliden Wertentwicklung und hältst gleichzeitig deine laufenden Kosten niedrig.",
   end: 

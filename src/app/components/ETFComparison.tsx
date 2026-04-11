@@ -56,9 +56,9 @@ export function ETFComparison() {
                 </span>
               </td>
               <td className="py-3 px-2 font-semibold text-green-700 text-center align-middle">
-                5,2%
+                5,2 %
               </td>
-              <td className="py-3 px-2 text-center align-middle">0,3%</td>
+              <td className="py-3 px-2 text-center align-middle">0,3 %</td>
               <td className="py-3 px-2 text-center text-s align-middle">
                 Technologie, Konsum, Energie
               </td>
@@ -77,9 +77,9 @@ export function ETFComparison() {
                 </span>
               </td>
               <td className="py-3 px-2 font-semibold text-green-700 text-center align-middle">
-                3,1%
+                3,1 %
               </td>
-              <td className="py-3 px-2 text-center align-middle">0,2%</td>
+              <td className="py-3 px-2 text-center align-middle">0,2 %</td>
               <td className="py-3 px-2 text-center text-s align-middle">
                 Gesundheit, Umwelt, Energie
               </td>
